@@ -1,12 +1,12 @@
-import time
-import numpy as np
-from scipy.stats import skew, kurtosis
-import pandas as pd
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-import os
-import joblib
-from PIL import Image, ImageTk  # Import Image and ImageTk from PIL
-import pygame  # Import pygame library
-import imageio
+from ttkthemes import ThemedStyle
+from tkinter import font
+
+
+class EMGRecorderApp:
+    def __init__(self, root, serial_port):
+        self.root = root
+        self.root.title("MyoAuth")
+        self.root.geometry("700x500")  # Set window size
+        self.root.iconbitmap(default='myoauthicon.ico')
+        self.root.configure(bg='white')
+
