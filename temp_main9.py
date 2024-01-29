@@ -1,12 +1,12 @@
-        image_path = 'myoauthicon.png'  # Replace with your image path
-        original_image = Image.open(image_path)
-        resized_image = original_image.resize((200, 200), Image.LANCZOS)
-        self.image = ImageTk.PhotoImage(resized_image)
-        self.image_label = tk.Label(self.root, image=self.image,background="white")
-        self.image_label.place(relx=0.5, rely=0.4, anchor='center')
+        pygame.init()
+        pygame.mixer.music.load('myoauthintro.mp3')  # Replace with your audio file path
+        pygame.mixer.music.play(0)  # Start playing
+        self.fade_out_audio(1000, 0.1)  # Fade in over 3000 milliseconds (3 seconds) with a step of 0.5
 
-        # Create a label for the title
-        self.title_label = ttk.Label(self.root, text="MyoAuth", font=("Calibri", 25), foreground='green',background="white")
-        self.title_label.place(relx=0.5, rely=0.65, anchor='center')
+        # Schedule the transition to the main window after 5000 milliseconds (5 seconds)
+        self.root.after(2500, self.show_main_window)
 
-        # Play audio when the title is shown
+    def fade_out_audio(self, duration, step):
+        current_volume = 2.0
+        # Gradually decrease the volume to simulate a fade-out effect
+        for i in range(int(duration / step)):
