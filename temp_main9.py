@@ -1,12 +1,12 @@
-        pygame.init()
-        pygame.mixer.music.load('myoauthintro.mp3')  # Replace with your audio file path
-        pygame.mixer.music.play(0)  # Start playing
-        self.fade_out_audio(1000, 0.1)  # Fade in over 3000 milliseconds (3 seconds) with a step of 0.5
+            current_volume -= step
+            pygame.mixer.music.set_volume(max(0.1, current_volume))
+            pygame.time.delay(int(step))
 
-        # Schedule the transition to the main window after 5000 milliseconds (5 seconds)
-        self.root.after(2500, self.show_main_window)
+    def show_main_window(self):
+        # Destroy the title label
+        self.title_label.destroy()
+        self.image_label.destroy()
 
-    def fade_out_audio(self, duration, step):
-        current_volume = 2.0
-        # Gradually decrease the volume to simulate a fade-out effect
-        for i in range(int(duration / step)):
+        self.clear_window()
+
+        # Create buttons for the main window
