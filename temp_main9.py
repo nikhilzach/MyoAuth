@@ -1,12 +1,12 @@
 
-    def show_login_window(self):
-        # Clear the window
-        self.clear_window()
+        self.user_entry = ttk.Entry(self.root, justify="center", font=("Helvetica", 12))
+        self.user_entry.place(relx=0.5, rely=0.42, anchor='center', width=200)
 
-        self.initial_option = "login"
+        self.verify_button = ttk.Button(self.root, text="Verify", command=self.verify_person)
+        self.verify_button.place(relx=0.5, rely=0.55, anchor='center', width=150, height=35)
 
-        login_label = tk.Label(self.root, text="User Login", background="white", font=("Helvetica", 15, "bold"), fg="green")
-        login_label.place(relx=0.5, rely=0.1, anchor='center')
+        self.back_button = ttk.Button(self.root, text="Back", command=self.show_main_window)
+        self.back_button.place(relx=0.5, rely=0.65, anchor='center', width=150, height=35)
 
-        self.user_label = ttk.Label(self.root, text="Enter Username", background="white", font=("Helvetica", 12))
-        self.user_label.place(relx=0.5, rely=0.35, anchor='center')
+    def show_register_window(self):
+        # Clear the window
