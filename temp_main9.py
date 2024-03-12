@@ -1,12 +1,12 @@
-        self.clear_window()
 
-        self.initial_option = "register"
+        self.preprocess_button = ttk.Button(self.root, text="Extract Features", command=self.feature_extract_data)
+        self.preprocess_button.place(relx=0.5, rely=0.4, anchor='center', width=200, height=40)
 
-        register_label = tk.Label(self.root, text="New User Registration", background="white", font=("Helvetica", 15, "bold"), fg="green")
-        register_label.place(relx=0.5, rely=0.1, anchor='center')
-        
-        self.step = 0
-        
-        # Create "Record EMG Signals," "Extract Features," and "Train" buttons
-        self.record_button = ttk.Button(self.root, text="Record EMG Signals", command=self.start_recording_instructions)
-        self.record_button.place(relx=0.5, rely=0.3, anchor='center', width=200, height=40)
+        self.train_button = ttk.Button(self.root, text="Train", command=self.train_classifier)
+        self.train_button.place(relx=0.5, rely=0.5, anchor='center', width=150, height=35)
+
+        self.back_button = ttk.Button(self.root, text="Back", command=self.show_main_window)
+        self.back_button.place(relx=0.5, rely=0.6, anchor='center', width=150, height=35)
+
+    def step_counter(self):
+        # Add your logic for the step counter here
