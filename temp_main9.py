@@ -1,12 +1,12 @@
-        self.instructions_label4.place(relx=0.5, rely=0.35, anchor='center')
+        self.back_button = ttk.Button(self.root, text="Back", command=self.show_register_window)
+        self.back_button.place(relx=0.5, rely=0.7, anchor='center')
 
-        self.user_label = ttk.Label(self.root, text="Before we start, enter Username", font=("Helvetica", 11), background="white")
-        self.user_label.place(relx=0.5, rely=0.45, anchor='center')
+    def clear_window(self):
+        # Destroy all widgets in the window
+        for widget in self.root.winfo_children():
+            widget.destroy()
 
-        self.user_entry = ttk.Entry(self.root, justify="center", font=("Helvetica", 12),width=30)
-        self.user_entry.place(relx=0.5, rely=0.52, anchor='center')
-
-        # Create "Start Recording" button
-        self.next_button = ttk.Button(self.root, text="Start Recording", command=self.step_counter)
-        self.next_button.place(relx=0.5, rely=0.6, anchor='center')
-
+    def start_recording(self):
+        if(self.step==1):
+            user_name = self.user_entry.get()
+            self.user_name = user_name
