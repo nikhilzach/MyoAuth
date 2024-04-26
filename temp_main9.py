@@ -1,12 +1,12 @@
-        if user_name not in self.emg_data:
-            self.emg_data[user_name] = []  # Create an empty list for the user if not present
+        step_label.config(text=f"Step {self.step} / 5")
 
-        self.emg_data.clear()
-        self.emg_data[user_name] = []
-        self.clear_window()
+        countdown_label = tk.Label(self.root, text="", font=("Helvetica", 12), background="white")
+        countdown_label.place(relx=0.5, rely=0.2, anchor='center')
 
-        self.data_thread = threading.Thread(target=self.record_emg, args=(user_name,))
-        self.data_thread.start()
+        # Start the countdown in a separate thread
+        countdown_thread = threading.Thread(target=self.start_countdown, args=(2, countdown_label))
+        countdown_thread.start()
+    
+    def start_countdown(self, seconds, countdown_label):
 
-        step_label = tk.Label(self.root, text="", font=("Helvetica", 15,"bold"), background="white",foreground="green")
-        step_label.place(relx=0.5, rely=0.1, anchor='center')
+        gif_path = 'wave2.gif'  # Replace with your GIF path
