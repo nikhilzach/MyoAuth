@@ -1,12 +1,12 @@
-        step_label.config(text=f"Step {self.step} / 5")
+        self.gif_label = tk.Label(self.root,background="white")
+        self.gif_label.place(relx=0.5, rely=0.3, anchor='center')
+        self.show_gif(gif_path, 2)  # Display the GIF for 5 seconds
 
-        countdown_label = tk.Label(self.root, text="", font=("Helvetica", 12), background="white")
-        countdown_label.place(relx=0.5, rely=0.2, anchor='center')
+        for i in range(0,seconds,1):
+            countdown_label.config(text=f"Recording...  {i} seconds")
+            time.sleep(1)
+        countdown_label.config(text="Recording Complete")
 
-        # Start the countdown in a separate thread
-        countdown_thread = threading.Thread(target=self.start_countdown, args=(2, countdown_label))
-        countdown_thread.start()
-    
-    def start_countdown(self, seconds, countdown_label):
-
-        gif_path = 'wave2.gif'  # Replace with your GIF path
+    def show_gif(self, gif_path, duration):
+        # Create a label to display the GIF
+        self.gif_label = tk.Label(self.root,background="white")
