@@ -1,12 +1,12 @@
-        self.gif_label = tk.Label(self.root,background="white")
-        self.gif_label.place(relx=0.5, rely=0.3, anchor='center')
-        self.show_gif(gif_path, 2)  # Display the GIF for 5 seconds
+        self.gif_label.place(relx=0.5, rely=0.4, anchor='center')
 
-        for i in range(0,seconds,1):
-            countdown_label.config(text=f"Recording...  {i} seconds")
-            time.sleep(1)
-        countdown_label.config(text="Recording Complete")
+        # Load the animated GIF
+        gif = imageio.mimread(gif_path)
+        gif_images = [Image.fromarray(img) for img in gif]
 
-    def show_gif(self, gif_path, duration):
-        # Create a label to display the GIF
-        self.gif_label = tk.Label(self.root,background="white")
+        # Convert the PIL Images to Tkinter-compatible format
+        self.gif_photos = [ImageTk.PhotoImage(img) for img in gif_images]
+
+        # Display the animated GIF
+        self.animate_gif(0, duration)
+
