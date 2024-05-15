@@ -1,12 +1,12 @@
-        self.gif_label.place(relx=0.5, rely=0.4, anchor='center')
+    def animate_gif(self, index, duration):
+        # Display the current frame of the animated GIF
+        self.gif_label.config(image=self.gif_photos[index])
 
-        # Load the animated GIF
-        gif = imageio.mimread(gif_path)
-        gif_images = [Image.fromarray(img) for img in gif]
-
-        # Convert the PIL Images to Tkinter-compatible format
-        self.gif_photos = [ImageTk.PhotoImage(img) for img in gif_images]
-
-        # Display the animated GIF
-        self.animate_gif(0, duration)
-
+        # Schedule the next frame to be shown after a delay
+        if index < len(self.gif_photos) - 1:
+            self.root.after(int(duration * 1000 / len(self.gif_photos)), self.animate_gif, index + 1, duration)
+        elif self.initial_option=="register":
+            # Schedule the static image to be shown after the animated GIF
+            self.root.after(int(duration * 160), self.show_static_image, 'tick2.png')
+        else:
+            pass
