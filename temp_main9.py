@@ -1,12 +1,12 @@
-    def record_emg(self, user_name):
-        print(user_name)
-        with serial.Serial(self.serial_port, 115200, timeout=1) as ser:
-            ser.reset_input_buffer()
+                        self.emg_data[user_name].append((timestamp, emg_value))
+                except ValueError as e:
+                    print(f"Error parsing data: {e}")
 
-            start_time = time.time()
-            while time.time() - start_time < 2:
-                try:
-                    line = ser.readline().decode().strip()
-                    if line:
-                        timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-                        emg_value = float(line)
+        # Save data to CSV after recording
+        self.save_to_csv()
+
+    def save_to_csv(self):
+        filename = "all_users_emg_data.csv"
+
+        # Check if the file already exists
+        file_exists = os.path.isfile(filename)
