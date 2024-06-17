@@ -1,12 +1,12 @@
 
-        with open(filename, 'a', newline='') as csvfile:
-            csv_writer = csv.writer(csvfile)
+        print(f"EMG data saved to {filename}")
 
-            # Write header only if the file doesn't exist
-            if not file_exists:
-                csv_writer.writerow(["Username", "timestamps", "emgvalues"])
+    def feature_extract_data(self):
+        input_file = filedialog.askopenfilename(title="Select CSV file", filetypes=[("CSV files", "*.csv")])
 
-            for user_name, data in self.emg_data.items():
-                print(user_name)
-                for timestamp, emg_value in data:
-                    csv_writer.writerow([user_name, timestamp, emg_value])
+        if not input_file:
+            return
+
+        output_file = filedialog.asksaveasfilename(title="Save Feature data as", defaultextension=".csv", filetypes=[("CSV files", "*.csv")])
+
+        if not output_file:
