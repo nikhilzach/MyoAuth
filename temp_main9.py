@@ -1,12 +1,12 @@
-
-        print(f"EMG data saved to {filename}")
-
-    def feature_extract_data(self):
-        input_file = filedialog.askopenfilename(title="Select CSV file", filetypes=[("CSV files", "*.csv")])
-
-        if not input_file:
             return
 
-        output_file = filedialog.asksaveasfilename(title="Save Feature data as", defaultextension=".csv", filetypes=[("CSV files", "*.csv")])
+        self.extract_features(input_file, output_file)
 
-        if not output_file:
+    def extract_features(self, input_file, output_file):
+        df = pd.read_csv(input_file)
+
+        feature_vectors = []
+        for user_name, user_data in df.groupby('Username'):
+            emg_values = user_data['emgvalues'].tolist()
+            features = self.calculate_features(emg_values)
+            user_name = ''.join(char for char in user_name if not char.isdigit())
