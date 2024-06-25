@@ -1,12 +1,12 @@
-            return
+            feature_vectors.append({'Username': user_name, 'Features': features})
 
-        self.extract_features(input_file, output_file)
+        feature_df = pd.DataFrame(feature_vectors)
+        feature_df.to_csv(output_file, index=False)
 
-    def extract_features(self, input_file, output_file):
-        df = pd.read_csv(input_file)
+        print(f"\nFeature vectors saved to {output_file}")
 
-        feature_vectors = []
-        for user_name, user_data in df.groupby('Username'):
-            emg_values = user_data['emgvalues'].tolist()
-            features = self.calculate_features(emg_values)
-            user_name = ''.join(char for char in user_name if not char.isdigit())
+    def calculate_features(self, emg_values):
+        # feature extraction
+        features = []
+        features.append(np.mean(np.abs(emg_values),axis=0)) #mean absolute value
+        features.append(np.sum(np.abs(np.diff(emg_values)),axis=0)) #waveform length
