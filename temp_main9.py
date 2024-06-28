@@ -1,12 +1,12 @@
-            feature_vectors.append({'Username': user_name, 'Features': features})
+        features.append(np.sum(np.diff(np.sign(emg_values),axis=0)!=0,axis=0)/(len(emg_values)-1))
+        features.append(skew(emg_values,axis=0))
+        features.append(kurtosis(emg_values,axis=0))
+        features.append(np.sqrt(np.mean(np.array(emg_values)**2,axis=0))) #root mean sqaure
+        features.append(np.sum(np.array(emg_values)**2,axis=0)) #simple square integral
+        return features
+    
+    def train_classifier(self):
+        # Load feature vectors from the CSV file
+        input_file = filedialog.askopenfilename(title="Select Feature Vectors CSV file", filetypes=[("CSV files", "*.csv")])
 
-        feature_df = pd.DataFrame(feature_vectors)
-        feature_df.to_csv(output_file, index=False)
-
-        print(f"\nFeature vectors saved to {output_file}")
-
-    def calculate_features(self, emg_values):
-        # feature extraction
-        features = []
-        features.append(np.mean(np.abs(emg_values),axis=0)) #mean absolute value
-        features.append(np.sum(np.abs(np.diff(emg_values)),axis=0)) #waveform length
+        if not input_file:
