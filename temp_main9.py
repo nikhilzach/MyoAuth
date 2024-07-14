@@ -1,12 +1,12 @@
-            user_data = df[df['Username'] == user].sample(1)  # Select one random row for each user
-            testing_data.append(user_data)
+        print(X_train)
+        print(y_train)
 
-        testing_df = pd.concat(testing_data)
-        training_df = df.drop(testing_df.index)
+        # Standardize the feature values
+        print("Standardizing feature values...")
+        self.scaler = StandardScaler()
+        X_train_scaled = self.scaler.fit_transform(X_train)
+        X_test_scaled = self.scaler.transform(X_test)
 
-        # Extract features and labels from training and testing datasets
-        X_train = np.vstack(training_df['Features'])
-        y_train = training_df['Username']
-        X_test = np.vstack(testing_df['Features'])
-        y_test = testing_df['Username']
-
+        # Create and train the KNN classifier
+        print("Training KNN classifier...")
+        self.knn_classifier = KNeighborsClassifier(n_neighbors=1, metric='manhattan')
